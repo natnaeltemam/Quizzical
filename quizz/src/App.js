@@ -1,12 +1,25 @@
+import React from 'react'
+import './App.css'
+import Quizzes from './compontes/Quizzes';
+import StartQuizzes from './compontes/StartQuizz';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Router>
 
-        <h1> Learn React </h1>
+      <div className="App">
 
-      </header>
-    </div>
+
+        <Routes>
+          <Route path="/about" element={<Quizzes />} />
+          <Route path="/" element={<StartQuizzes />} />
+        </Routes>
+      </div>
+    </Router>
+
+
   );
 }
 
