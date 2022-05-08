@@ -10,8 +10,6 @@ function App() {
     <Router>
 
       <div className="App">
-
-
         <Routes>
           <Route path="/about" element={<Quizzes />} />
           <Route path="/" element={<StartQuizzes />} />

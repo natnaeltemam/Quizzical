@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 function Shope() {
     let navigate = useNavigate()
     return (
-        <div>
-            <h1> Shope Page</h1>
+        <div className='Start'>
+            <h1 className='ka'> Quizzical</h1>
+            <p className='in'>Some Description</p>
             <button
                 onClick={() => {
                     navigate('/about')
-                }}>About</button>
+                }}>Start quiz</button>
         </div>
     )
 }
