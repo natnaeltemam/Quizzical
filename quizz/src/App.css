@@ -44,6 +44,9 @@ button{
 
 }
 .Quis{
+    background-image: url('./img/question-mark-on-blue.webp');
+    background-repeat: no-repeat;
+    background-size: 1400px;
     display: flex;
     flex-direction: column;  
     align-items: center;
@@ -55,7 +58,7 @@ button{
     font-family: Karla,Helvetica, sans-serif;
     font-weight: 700;
     font-size: 16px;
-    
+    color: #ffffff
     
     
 
@@ -69,7 +72,7 @@ button{
     width: auto;
     display: inline;
     font-family: Inter;
-    padding: 5px 20px;
+    /*padding: 5px 20px;*/
     font-size: 13px;
     font-weight: 500;
     line-height: 12px;
@@ -84,4 +87,13 @@ button{
     margin-bottom: 17px;
     border-bottom: 0.79px solid #DBDEF0;
     width: 600px;
+}
+.quezz{
+    
+    max-width: 362px;
+    width: auto;
+}
+.choose{
+    max-width: 500px;
+    width: auto;
 }
