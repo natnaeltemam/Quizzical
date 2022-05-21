@@ -4,24 +4,28 @@ import data from './data'
 import { nanoid } from 'nanoid'
 function Quizzes() {
     const [quizzs, setQuizzes] = React.useState(data['results'])
-    function ChooseSelect() {
-        console.log("This is select")
+    function ChooseSelect(id) {
+        console.log(id)
     }
     const Quizz = quizzs.map(data => {
         const choose = [data.correct_answer, data.incorrect_answers[0]
             , data.incorrect_answers[1], data.incorrect_answers[2]]
         const shufflechose = choose.sort((a, b) => 0.5 - Math.random())
-        const id = nanoid()
+        const id = []
+        for (let i = 0; i < 4; i++) {
+            id.push(nanoid())
+        }
+
         return (
             <Quesions
                 key={id}
                 Q={data.question}
-                C1={shufflechose[0]}
-                C2={shufflechose[1]}
-                C3={shufflechose[2]}
-                C4={shufflechose[3]}
+                C1={{ value: shufflechose[0], id: id[0] }}
+                C2={{ value: shufflechose[1], id: id[1] }}
+                C3={{ value: shufflechose[2], id: id[2] }}
+                C4={{ value: shufflechose[3], id: id[3] }}
                 Click={ChooseSelect}
-                isHeld={false} />
+            />
         )
     }
     )

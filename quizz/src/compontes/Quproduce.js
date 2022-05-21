@@ -3,10 +3,10 @@ export default function QuProduce(props) {
         <div className="que">
             <h2 className='choseq'> {props.Q}</h2>
             <div className="choose">
-                <button className="ch chty" onClick={props.Click} id="4447">{props.C1}</button>
-                <button className="ch" onClick={props.Click}>{props.C2}</button>
-                <button className="ch" onClick={props.Click}>{props.C3}</button>
-                <button className="ch" onClick={props.Click}>{props.C4}</button>
+                <button className="ch" onClick={() => props.Click(props.C1.id)} id={props.C1.id}>{props.C1.value}</button>
+                <button className="ch" onClick={() => props.Click(props.C2.id)} id={props.C2.id}>{props.C2.value}</button>
+                <button className="ch" onClick={() => props.Click(props.C3.id)} id={props.C3.id}>{props.C3.value}</button>
+                <button className="ch" onClick={() => props.Click(props.C4.id)} id={props.C4.id}>{props.C4.value}</button>
             </div>
         </div>
     )
