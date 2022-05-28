@@ -46,9 +46,11 @@ h1 {
 button {
     background: #4D5B9E;
     border-radius: 15px;
-    width: 193px;
+    width: auto;
     height: 52px;
+    padding: 0 30px;
     color: #F5F7FB;
+
 
 }
 
@@ -125,4 +127,22 @@ button {
 .choose {
     max-width: 500px;
     width: auto;
+}
+
+.chAnswer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.count {
+    color: #ffa500;
+    padding-right: 25px;
+    font-family: Inter, Helvetica, sans-serif;
+    font-weight: 700px;
+    font-size: 15px;
+    line-height: 15px;
+    letter-spacing: 0em;
+
 }

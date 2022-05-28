@@ -2,9 +2,11 @@ import React from 'react'
 import Quesions from './Quproduce'
 import data from './data'
 import { nanoid } from 'nanoid'
+import Confetti from "react-confetti"
 function Quizzes() {
     const [data_quizzs, setQuizzes] = React.useState(data['results'])
     const [each_quizz, seteachQuizz] = React.useState({})
+    const [final_Answer, setFinalAnswer] = React.useState({ count: 0, isfinshined: false })
 
     function ChooseSelect(id) {
         seteachQuizz(prevQuiz => {
@@ -42,18 +44,66 @@ function Quizzes() {
                     }
                 }
 
-                console.log(value2, "This is v2")
+
                 value.push(value3 !== 0 ? value2 : value1)
             }
 
             return value
         })
     }
+    function checkAnswer(e) {
+
+        let numb = 0
+        if (e.target.value === 'Check answers') {
+            seteachQuizz(prevQuiz => {
+                const value = []
+                numb = 0
+                for (let i = 0; i < prevQuiz.length; i++) {
+                    const quizz = prevQuiz[i]
+                    let temp = 0
+                    const value1 = []
+                    for (let j = 0; j < quizz.length; j++) {
+                        if (j === 0) {
+
+                        }
+                        else {
+                            value1.push(quizz[j])
+                        }
+                        if (quizz[j].isHeld && quizz[j].isCorrect) {
+                            numb++
+                            temp++
+
+                        }
+                    }
+                    if (temp > 0) {
+                        quizz[0].isAnswerCo = 'Correct'
+
+                    }
+                    else {
+                        quizz[0].isAnswerCo = 'inCorrect'
+                    }
+                    value1.unshift(quizz[0])
+                    value.push(value1)
+                }
+                setFinalAnswer({ count: numb, isfinshined: true })
+                return value
+
+            })
+
+
+
+        }
+
+        else {
+
+        }
+
+    }
 
     React.useEffect(() => {
         seteachQuizz(data_quizzs.map(data => {
             const data_qu = []
-            data_qu.push({ question: data.question })
+            data_qu.push({ question: data.question, isAnswerCo: 'notChecked' })
             const choose = [data.correct_answer, data.incorrect_answers[0]
                 , data.incorrect_answers[1], data.incorrect_answers[2]]
             const shufflechose = choose.sort((a, b) => 0.5 - Math.random())
@@ -68,14 +118,14 @@ function Quizzes() {
 
             return data_qu
         }))
-    }, [])
+    }, [data_quizzs])
     const Quizz = []
     for (let i = 0; i < each_quizz.length; i++) {
         const quiesion = each_quizz[i]
         const t_id = nanoid()
         Quizz.push(<Quesions
             key={t_id}
-            Q={quiesion[0].question}
+            Q={quiesion[0]}
             C1={quiesion[1]}
             C2={quiesion[2]}
             C3={quiesion[3]}
@@ -89,10 +139,16 @@ function Quizzes() {
     return (
         <div className='Quis'>
             <div className='allQ'>
-
+                {(final_Answer.count === 5) && <Confetti />}
                 {Quizz}
 
-                <button> Check answers </button>
+                <div className="chAnswer">
+                    {final_Answer.isfinshined && <h3 className='count'>You answers {final_Answer.count}/5 Correct answers</h3>}
+
+                    <button onClick={checkAnswer} value={final_Answer.isfinshined ? 'Play again' : 'Check answers'}> {final_Answer.isfinshined ? 'Play again' : 'Check answers'}</button>
+                </div>
+
+
             </div>
         </div>
     )
