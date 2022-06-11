@@ -7,13 +7,6 @@ function Quizzes() {
     const [data_quizzs, setQuizzes] = React.useState(data['results'])
     const [each_quizz, seteachQuizz] = React.useState({})
     const [final_Answer, setFinalAnswer] = React.useState({ count: 0, isfinshined: false })
-    const [count, setCount] = React.useState(0)
-
-    React.useEffect(function () {
-        fetch("https://opentdb.com/api.php?amount=5&type=multiple")
-            .then(res => res.json())
-            .then(data => setQuizzes(data.results))
-    }, [count])
 
     function ChooseSelect(id) {
         seteachQuizz(prevQuiz => {
@@ -102,8 +95,6 @@ function Quizzes() {
         }
 
         else {
-            setCount(prevCount => prevCount + 1)
-            setFinalAnswer({ count: 0, isfinshined: false })
 
         }
 
