@@ -29,9 +29,45 @@ export default function QuProduce(props) {
 
         return style
     }
+    var htmlEntities = {
+        nbsp: ' ',
+        cent: '¢',
+        pound: '£',
+        yen: '¥',
+        euro: '€',
+        copy: '©',
+        reg: '®',
+        lt: '<',
+        gt: '>',
+        quot: '"',
+        amp: '&',
+        apos: '\''
+    };
+    function unescapeHTML(str) {
+        return str.replace(/\&([^;]+);/g, function (entity, entityCode) {
+            var match;
+
+            if (entityCode in htmlEntities) {
+                return htmlEntities[entityCode];
+                /*eslint no-cond-assign: 0*/
+            } else if (match = entityCode.match(/^#x([\da-fA-F]+)$/)) {
+                return String.fromCharCode(parseInt(match[1], 16));
+                /*eslint no-cond-assign: 0*/
+            } else if (match = entityCode.match(/^#(\d+)$/)) {
+                return String.fromCharCode(~~match[1]);
+            } else {
+                return entity;
+            }
+        });
+    };
+    const question = unescapeHTML(props.Q.question)
+    const chooseA = unescapeHTML(props.C1.value)
+    const chooseB = unescapeHTML(props.C2.value)
+    const chooseC = unescapeHTML(props.C3.value)
+    const chooseD = unescapeHTML(props.C4.value)
     return (
         <div className="que">
-            <h2 className='choseq'> {props.Q.question}</h2>
+            <h2 className='choseq'> {question}</h2>
             <div className="choose">
                 <button className="ch"
                     disabled={val === 'notChecked' ? false : true}
@@ -39,7 +75,7 @@ export default function QuProduce(props) {
                     id={props.C1.id}
                     style={Style(props.C1)}
                 >
-                    {props.C1.value}
+                    {chooseA}
                 </button>
                 <button className="ch"
                     disabled={val === 'notChecked' ? false : true}
@@ -47,20 +83,20 @@ export default function QuProduce(props) {
                     id={props.C2.id}
                     style={Style(props.C2)}
                 >
-                    {props.C2.value}
+                    {chooseB}
                 </button>
                 <button className="ch"
                     disabled={val === 'notChecked' ? false : true}
                     onClick={() => props.Click(props.C3.id)}
                     id={props.C3.id}
                     style={Style(props.C3)}>
-                    {props.C3.value}</button>
+                    {chooseC}</button>
                 <button className="ch"
                     disabled={val === 'notChecked' ? false : true}
                     onClick={() => props.Click(props.C4.id)}
                     id={props.C4.id}
                     style={Style(props.C4)}>
-                    {props.C4.value}
+                    {chooseD}
                 </button>
             </div>
         </div>
