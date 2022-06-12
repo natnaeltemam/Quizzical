@@ -23,11 +23,11 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 40vh;
     color: #293264;
     background-image: url('./img/orange.webp');
-    background-repeat: repeat-x;
-
+    background-size: 1200px;
+    height: 640px;
 
 }
 
@@ -145,4 +145,37 @@ button {
     line-height: 15px;
     letter-spacing: 0em;
 
+}
+
+.home {
+    margin-left: 30px;
+}
+
+input {
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-family: Inter, Helvetica, sans-serif;
+    font-weight: 700px;
+    width: 400px;
+    padding: 15px;
+}
+
+select {
+    text-align: center;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-family: Inter, Helvetica, sans-serif;
+    font-weight: 700px;
+    width: 400px;
+
+}
+
+label {
+    font-family: Karla, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: black;
+    margin-bottom: px;
 }
