@@ -3,17 +3,31 @@ import Quesions from './Quproduce'
 import data from './data'
 import { nanoid } from 'nanoid'
 import Confetti from "react-confetti"
-function Quizzes() {
+import { useNavigate } from 'react-router-dom'
+function Quizzes(props) {
     const [data_quizzs, setQuizzes] = React.useState(data['results'])
     const [each_quizz, seteachQuizz] = React.useState({})
     const [final_Answer, setFinalAnswer] = React.useState({ count: 0, isfinshined: false })
     const [count, setCount] = React.useState(0)
-
+    let navigate = useNavigate()
+    function creat_url_api() {
+        let url_api = "https://opentdb.com/api.php?"
+        url_api += `amount=${props.value['number']}`
+        if (props.value['catgory'] !== "") {
+            url_api += `&category=${props.value['catgory']}`
+        }
+        if (props.value['diffculty'] !== "") {
+            url_api += `&difficulty=${props.value['diffculty']}`
+        }
+        url_api += "&type=multiple"
+        return url_api
+    }
+    const url_value = creat_url_api()
     React.useEffect(function () {
-        fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+        fetch(url_value)
             .then(res => res.json())
             .then(data => setQuizzes(data.results))
-    }, [count])
+    }, [count, url_value])
 
     function ChooseSelect(id) {
         seteachQuizz(prevQuiz => {
@@ -148,13 +162,22 @@ function Quizzes() {
     return (
         <div className='Quis'>
             <div className='allQ'>
-                {(final_Answer.count === 5) && <Confetti />}
+                {(final_Answer.count === props.value.number) && <Confetti />}
                 {Quizz}
 
                 <div className="chAnswer">
-                    {final_Answer.isfinshined && <h3 className='count'>You answers {final_Answer.count}/5 Correct answers</h3>}
+                    {final_Answer.isfinshined && <h3 className='count'>You answers {final_Answer.count}/{props.value.number} Correct answers</h3>}
 
-                    <button onClick={checkAnswer} value={final_Answer.isfinshined ? 'Play again' : 'Check answers'}> {final_Answer.isfinshined ? 'Play again' : 'Check answers'}</button>
+
+                    <button onClick={checkAnswer}
+                        value={final_Answer.isfinshined ? 'Play again' : 'Check answers'}>
+                        {final_Answer.isfinshined ? 'Play again' : 'Check answers'}
+                    </button>
+                    <button
+                        className='home'
+                        onClick={() => {
+                            navigate('/')
+                        }}>Home page</button>
                 </div>
 
 
